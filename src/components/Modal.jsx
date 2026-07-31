@@ -8,7 +8,8 @@ export default function Modal({ children }) {
   }
   return(
     <>
-      <div className={classes.backdrop} onClick={closeHandler}>
+      <div className={classes.backdrop} >
+        {/* onClick={closeHandler} this event somehow triggering the all dialog also that why comment it out */}
         <dialog open className={classes.modal}>
           {children}
         </dialog>
