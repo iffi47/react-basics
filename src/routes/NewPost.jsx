@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import classes from './NewPost.module.css';
 import Modal from '../components/Modal';
+import { Link, useNavigate } from 'react-router-dom';
 
 function NewPost(props) {
      const[bodyValue, setBodyvalue] = useState("");
-   const [authorName, setAuthorName] = useState("");
-
+  const [authorName, setAuthorName] = useState("");
+  const navigate = useNavigate();
     const hanldeBodyChange = (event)=> {
       setBodyvalue(event.target.value)
     };
@@ -20,6 +21,9 @@ function NewPost(props) {
       }
       props.onAddPost(postData);
       props.onCancel();
+  };
+  const handleCancelNavigation = () => {
+    navigate("..")
     }
   return (
     <Modal>
@@ -33,7 +37,7 @@ function NewPost(props) {
         <input type="text" id="name" required onChange={handleAuthorName} />
       </p>
       <p className={classes.actions}>
-        <button type='button' onClick={props.onCancel}>Cancel</button>
+          <Link type='button' onClick={handleCancelNavigation}>Cancel</Link>
         <button>Submit</button>
       </p>
     </form>
