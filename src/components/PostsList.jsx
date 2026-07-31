@@ -1,29 +1,17 @@
 
+import { useLoaderData } from "react-router-dom";
 import Post from "./Post";
 import classes from "./PostsList.module.css";
 import { useEffect, useState } from "react";
 
-const names =["gfdgdf","fdgdf"];
 
 export default function PostsList() {
 
-  const [postsList, setPostsList] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-  const chosenName = Math.random() > 0.6 ? names[0] : names[1];
-  useEffect(() =>{
-     async function fetchPostsData(){
-      setIsFetching(true);
-      const response=await fetch("http://localhost:8080/posts");
-      const resData= await response.json();
-      setPostsList(resData.posts);
-      setIsFetching(false);
-    }
-    fetchPostsData();
-  },[])
+  const posts = useLoaderData();
   const addPositionHandler = (postData) => {
-    const response =fetch("http://localhost:8080/posts",{
+    const response = fetch("http://localhost:8080/posts", {
       method: "POST",
-      headers:{
+      headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(postData)
@@ -34,10 +22,11 @@ export default function PostsList() {
   return (
     <>
 
-      { !isFetching ? <ul className={classes.posts}>
+      {<ul className={classes.posts}>
         {/* <Post chosenName={authorName} body={bodyValue} /> */}
-       {postsList.map((post) =>(<Post chosenName={post.author} body={post.body} />)) }
-      </ul> : "Loading"}
+        {posts.map((post) => (<Post chosenName={post.author} body={post.body} />))}
+      </ul>}
     </>
   )
-}
+};
+
