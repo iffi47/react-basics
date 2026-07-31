@@ -26,6 +26,11 @@ function PostDetails() {
       <main className={classes.details}>
         <p className={classes.author}>{post.author}</p>
         <p className={classes.text}>{post.body}</p>
+        <p>
+          <Link to=".." className={classes.btn}>
+            Okay
+          </Link>
+        </p>
       </main>
     </Modal>
   );
